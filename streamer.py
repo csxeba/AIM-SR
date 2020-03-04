@@ -48,6 +48,10 @@ class Stream:
             root = self.DEFAULT_ROOT
 
         self.root = pathlib.Path(root)
+
+        if not self.root.exists():
+            raise RuntimeError("Supplied dataset root does not exist: {}".format(str(self.root)))
+
         self.paths = []
         self.labels = []
 
