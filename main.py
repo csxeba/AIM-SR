@@ -14,6 +14,9 @@ import streamer
 BATCH_SIZE = 10
 LEARNING_RATE = 1e-3
 
+# Epoch length will be divided by this and number of epochs will be multiplied.
+VALIDATION_INCREASE_FACTOR = 4
+
 # Brainforge convolution expects channels first format.
 stream = streamer.Stream(image_format="channels_first")
 
@@ -43,8 +46,8 @@ stack = LayerStack(stream.input_shape, layers=[
 net = Backpropagation(layerstack=stack, cost="cxent", optimizer=optimizers.Adam(LEARNING_RATE))
 
 net.fit_generator(stream.iter_subset("train", BATCH_SIZE),
-                  lessons_per_epoch=stream.steps_per_epoch("train", BATCH_SIZE),
-                  epochs=10,
+                  lessons_per_epoch=stream.steps_per_epoch("train", BATCH_SIZE) // VALIDATION_INCREASE_FACTOR,
+                  epochs=10 * VALIDATION_INCREASE_FACTOR,
                   metrics=["acc"],
                   validation=stream.iter_subset("val", BATCH_SIZE),
                   validation_steps=stream.steps_per_epoch("val", BATCH_SIZE))
