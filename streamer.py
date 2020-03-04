@@ -23,7 +23,11 @@ class Format:
 
 class Stream:
 
-    DEFAULT_ROOT = "/data/Datasets/AIM-SR"
+    """
+    Streamer and parser for the 52x52 road sign classification dataset
+    """
+
+    DEFAULT_ROOT = "data/train-dataset-52x52"
     NUM_CLASSES = 12
 
     def __init__(self,
@@ -32,8 +36,6 @@ class Stream:
                  image_format: str = Format.CHANNELS_FIRST):
 
         """
-        Streamer and parser for the AIM-SR 52x52 BMP image dataset.
-
         :param root: str
             The data root directory.
         :param split_validation: float
