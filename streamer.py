@@ -27,7 +27,7 @@ class Stream:
     Streamer and parser for the 52x52 road sign classification dataset
     """
 
-    DEFAULT_ROOT = "data/train-dataset-52x52"
+    DEFAULT_ROOT = "data/train-52x52"
     NUM_CLASSES = 12
 
     def __init__(self,
