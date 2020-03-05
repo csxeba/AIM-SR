@@ -16,7 +16,7 @@ class Subset:
 
 
 class Format:
-    # Brainforge is channels first, but I did the hyperparam search in Keras :)
+    # BrainForge is channels first, but I did the hyperparam search in Keras :)
     CHANNELS_FIRST = "channels_first"
     CHANNELS_LAST = "channels_last"
 
@@ -72,6 +72,7 @@ class Stream:
 
         print(" [Streamer] - Num train samples:", len(self.subset_indices[Subset.TRAIN]))
         print(" [Streamer] - Num val samples:", len(self.subset_indices[Subset.VAL]))
+
         self.format = image_format
 
     @property
