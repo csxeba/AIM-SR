@@ -39,7 +39,7 @@ class Stream:
         :param root: str
             The data root directory.
         :param split_validation: float
-            Split factor for the validation set.
+            Validation set will be split from the end of every directory.
         :param image_format:
             Whether we use channels-first or channels-last representation.
         """
@@ -62,7 +62,7 @@ class Stream:
             if label == "dataset.png":
                 continue
             label = int(label) - 1
-            files = list(lib.glob("*.bmp"))
+            files = sorted(list(lib.glob("*.bmp")), key=lambda path: str(path))
             to_train = len(files) - int(len(files) * split_validation)
             for j, file_path in enumerate(files):
                 self.paths.append(file_path)
