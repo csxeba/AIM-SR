@@ -4,13 +4,14 @@ This module contains the logic for instantiating and fitting an CNN.
 
 import numpy as np
 
-from brainforge import Backpropagation, LayerStack
+from brainforge import DirectFeedbackAlignment, LayerStack
 from brainforge import layers
 from brainforge import optimizers
 
 import streamer
 
 # Low batch size with relatively high LR will act as a regularizer.
+EPOCHS = 6
 BATCH_SIZE = 10
 LEARNING_RATE = 1e-3
 
@@ -43,11 +44,11 @@ stack = LayerStack(stream.input_shape, layers=[
     layers.GlobalAveragePooling(),
     layers.Activation("softmax"),
 ])
-net = Backpropagation(layerstack=stack, cost="cxent", optimizer=optimizers.Adam(LEARNING_RATE))
+net = DirectFeedbackAlignment(layerstack=stack, cost="cxent", optimizer=optimizers.Adam(LEARNING_RATE))
 
 net.fit_generator(stream.iter_subset("train", BATCH_SIZE),
                   lessons_per_epoch=stream.steps_per_epoch("train", BATCH_SIZE) // VALIDATION_INCREASE_FACTOR,
-                  epochs=10 * VALIDATION_INCREASE_FACTOR,
+                  epochs= EPOCHS * VALIDATION_INCREASE_FACTOR,
                   metrics=["acc"],
                   validation=stream.iter_subset("val", BATCH_SIZE),
                   validation_steps=stream.steps_per_epoch("val", BATCH_SIZE))
