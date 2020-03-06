@@ -57,12 +57,14 @@ class Stream:
 
         self.subset_indices = {Subset.TRAIN: [], Subset.VAL: []}
 
-        for i, lib in enumerate(self.root.glob("*")):
+        directories = sorted(self.root.glob("*"), key=lambda path: str(path))  # Sorting ensures reproducibility
+
+        for i, lib in enumerate(directories):
             label = os.path.split(lib)[-1]
             if label == "dataset.png":
                 continue
             label = int(label) - 1
-            files = sorted(list(lib.glob("*.bmp")), key=lambda path: str(path))
+            files = sorted(list(lib.glob("*.bmp")), key=lambda path: str(path))  # Sorting for reproducibility
             to_train = len(files) - int(len(files) * split_validation)
             for j, file_path in enumerate(files):
                 self.paths.append(file_path)
