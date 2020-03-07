@@ -10,12 +10,9 @@ pip-delete-this-directory.txt
 # PyCharm
 .idea/
 
-<<<<<<< HEAD
-data/
-=======
 # Jupyter
 .ipynb_checkpoints/
 
 # Project
+data/
 data/AIM-SR/
->>>>>>> 57ea8a7555ce2c16212de5bdc931bee3f42f0f34

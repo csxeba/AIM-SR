@@ -8,7 +8,7 @@ from brainforge import Backpropagation, LayerStack
 from brainforge import layers
 from brainforge import optimizers
 
-import streamer
+import data
 
 # Low batch size with relatively high LR will act as a regularizer.
 EPOCHS = 6
@@ -19,7 +19,7 @@ LEARNING_RATE = 1e-3
 VALIDATION_INCREASE_FACTOR = 4
 
 # Brainforge convolution expects channels first format.
-stream = streamer.Stream(image_format="channels_first")
+stream = data.Dataset(image_format="channels_first")
 
 # I chose a fully convolutional architecture for this classification task.
 # Due to the low number of parameters of the Conv layer
