@@ -10,4 +10,5 @@ because the *Anaconda NumPy* package is built with *Intel MKL* and provides a 2-
 acceleration compared to the default *NumPy* available through `pip`.
 
 Please consider downloading the dataset before running the experiment. There is the
-`data/get.sh` script which automates downloading and extracting the dataset.
+`get.sh` script which automates downloading and extracting the dataset. The script should
+be ran with its parent `data` directory as the working directory.
